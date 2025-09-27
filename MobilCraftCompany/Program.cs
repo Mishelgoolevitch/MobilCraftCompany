@@ -37,6 +37,15 @@ namespace MobilCraftCompany
 
         }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+            //Настраиваем Auth cookie
+            builder.Services.ConfigureApplicationCookie(options => 
+            {
+                options.Cookie.Name = "mobilCraftAuth";
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/admin/login";
+                options.AccessDeniedPath= "/admin/accessdenied";
+                options.SlidingExpiration = true;
+            });
 
             //Собираем конфигурацию
             WebApplication app = builder.Build();
