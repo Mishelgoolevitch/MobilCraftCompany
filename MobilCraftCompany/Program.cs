@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using MobilCraftCompany.Domain;
 using MobilCraftCompany.Infrastructure;
 namespace MobilCraftCompany
@@ -8,22 +10,33 @@ namespace MobilCraftCompany
         public static async Task Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            
+
             //Подключаем в конфигурацию файл appsettings
-            IConfigurationBuilder configBuild=new ConfigurationBuilder()
+            IConfigurationBuilder configBuild = new ConfigurationBuilder()
                 .SetBasePath(builder.Environment.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange:true)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
-            
+
             //Оборачиваем секцию Project в объектную форму
             IConfiguration configuration = configBuild.Build();
-            AppConfig config=configuration.GetSection("Project").Get<AppConfig>()!;
+            AppConfig config = configuration.GetSection("Project").Get<AppConfig>()!;
 
             //Подключаем контекст базы данных
-            builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString));
-
+            builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString)
+            .ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
             //Подключаем функционал контролеров
             builder.Services.AddControllersWithViews();
+
+            //Настраиваем Identity систему
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => { options.User.RequireUniqueEmail = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit=false;
+
+        }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
 
             //Собираем конфигурацию
             WebApplication app = builder.Build();
