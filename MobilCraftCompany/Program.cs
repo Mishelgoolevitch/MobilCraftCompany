@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using MobilCraftCompany.Domain;
 using MobilCraftCompany.Infrastructure;
 namespace MobilCraftCompany
 {
@@ -16,6 +18,9 @@ namespace MobilCraftCompany
             //Оборачиваем секцию Project в объектную форму
             IConfiguration configuration = configBuild.Build();
             AppConfig config=configuration.GetSection("Project").Get<AppConfig>()!;
+
+            //Подключаем контекст базы данных
+            builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString));
 
             //Подключаем функционал контролеров
             builder.Services.AddControllersWithViews();
