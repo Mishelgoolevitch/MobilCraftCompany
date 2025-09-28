@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using MobilCraftCompany.Domain;
+using MobilCraftCompany.Domain.Repositories.Abstract;
+using MobilCraftCompany.Domain.Repositories.EntityFramework;
 using MobilCraftCompany.Infrastructure;
 namespace MobilCraftCompany
 {
@@ -23,6 +25,11 @@ namespace MobilCraftCompany
 
             //Подключаем контекст базы данных
             builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString).ConfigureWarnings(warnings=>warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
+
+            builder.Services.AddTransient<IServiceCategoriesRepository, EFServiceCategoriesRepository>();
+            builder.Services.AddTransient<IServicesRepository, EFServicesRepository>();
+            builder.Services.AddTransient<DataManager>();
+
             //Подключаем функционал контролеров
             builder.Services.AddControllersWithViews();
 
