@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MobilCraftCompany.Domain;
 
 namespace MobilCraftCompany.Controllers.Admin
 {
+    [Authorize(Roles ="admin")]
     public partial class AdminController : Controller
     {
         private readonly DataManager _dataManager;
