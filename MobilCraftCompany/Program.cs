@@ -22,8 +22,7 @@ namespace MobilCraftCompany
             AppConfig config = configuration.GetSection("Project").Get<AppConfig>()!;
 
             //Подключаем контекст базы данных
-            builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString)
-            .ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
+            builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(config.Database.ConnectionString).ConfigureWarnings(warnings=>warnings.Ignore(RelationalEventId.PendingModelChangesWarning)));
             //Подключаем функционал контролеров
             builder.Services.AddControllersWithViews();
 

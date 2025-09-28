@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.DataProtection.XmlEncryption;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MobilCraftCompany.Domain.Entities;
@@ -20,6 +21,7 @@ namespace MobilCraftCompany.Domain
             string roleAdminId = Guid.NewGuid().ToString();
             string userAdminId = Guid.NewGuid().ToString();
             
+
            //Добавляем роль администратора сайта
            builder.Entity<IdentityRole>().HasData(new IdentityRole()
             {
