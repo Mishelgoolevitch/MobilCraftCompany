@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MobilCraftCompany.Models;
+using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace MobilCraftCompany.Controllers
 {
@@ -20,6 +21,24 @@ namespace MobilCraftCompany.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(new LoginViewModel());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+
+            if(!ModelState.IsValid) 
+            return View(model);
+
+            SignInResult result= await _signInManager.PasswordSignInAsync(model.UserName!, model.Password!, model.RememberMe, false);
+
+            if (result.Succeeded)
+                return Redirect(returnUrl ?? "/");
+
+            ModelState.AddModelError(string.Empty, "Неверный логин и пароль");
+            return View(model);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
