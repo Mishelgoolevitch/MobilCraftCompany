@@ -9,7 +9,7 @@ namespace MobilCraftCompany.Domain
     public class AppDbContext:IdentityDbContext<IdentityUser>
     {
         public DbSet<ServiceCategory> ServiceCategories { get; set; } = null!;
-        DbSet<Service> Services { get; set; } = null!;
+     public   DbSet<Service> Services { get; set; } = null!;
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
