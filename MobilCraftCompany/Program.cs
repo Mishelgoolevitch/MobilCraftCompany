@@ -49,7 +49,7 @@ namespace MobilCraftCompany
             {
                 options.Cookie.Name = "mobilCraftAuth";
                 options.Cookie.HttpOnly = true;
-                options.LoginPath = "/admin/login";
+                options.LoginPath = "/account/login";
                 options.AccessDeniedPath= "/admin/accessdenied";
                 options.SlidingExpiration = true;
             });
