@@ -25,6 +25,16 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
+.div-box {
+    padding: 30px 0;
+}
+
+/*.img-block {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+*/
 body {
   line-height: 1;
 }
