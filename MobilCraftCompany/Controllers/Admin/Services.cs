@@ -8,7 +8,7 @@ namespace MobilCraftCompany.Controllers.Admin
         public async Task<IActionResult> ServicesEdit(int id)
         {
             Service? entity = id == default ? new Service() : await _dataManager.Services.GetServiceByIdAsync(id);
-            ViewBag.ServiceCategoreies = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
+            ViewBag.ServiceCategories = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
             return View(entity);
         }
 
@@ -17,7 +17,7 @@ namespace MobilCraftCompany.Controllers.Admin
         {
             if (!ModelState.IsValid)
             { 
-                ViewBag.ServiceCategoreies = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
+                ViewBag.ServiceCategories = await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
             return View(entity);
             }
 

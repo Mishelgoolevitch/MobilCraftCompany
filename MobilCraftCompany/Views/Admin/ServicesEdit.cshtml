@@ -1,15 +1,12 @@
-﻿
-@model Service
+﻿@model Service
 @{
 	string strTitle = "Редактировать запись";
 	ViewBag.Title = strTitle;
 }
 <div>
-	<h2>
-		@strTitle
-	</h2>
+	<h2>@strTitle</h2>
 	<div>
-		<form asp-area="" asp-controller="Admin" asp-action="ServiceEdit" method="post" enctype="multipart/form-data">
+		<form asp-area="" asp-controller="Admin" asp-action="ServicesEdit" method="post" enctype="multipart/form-data">
 			<input type="hidden" asp-for="Id" />
 			<input type="hidden" asp-for="DateCreated" />
 			<input type="hidden" asp-for="Photo" />

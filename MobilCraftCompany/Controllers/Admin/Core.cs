@@ -16,7 +16,7 @@ namespace MobilCraftCompany.Controllers.Admin
         }
         public async Task<IActionResult> Index()
         { 
-            ViewBag.ServiceCategoreies=await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
+            ViewBag.ServiceCategories=await _dataManager.ServiceCategories.GetServiceCategoriesAsync();
             ViewBag.Services=await _dataManager.Services.GetServicesAsync();
 
             return View();

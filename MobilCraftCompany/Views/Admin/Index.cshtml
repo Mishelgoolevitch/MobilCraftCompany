@@ -1,9 +1,10 @@
 ﻿@{
 	string strTitle = "Панель администратора";
 	ViewBag.Title = strTitle;
-	IEnumerable<ServiceCategory> serviceCategories = ViewBag.ServiceCategories;
+	IEnumerable<ServiceCategory>? serviceCategories = ViewBag.ServiceCategories;
 	IEnumerable<Service>? services = ViewBag.Services; 
-}
+	// var serviceCategories = ViewBag.ServiceCategoreies as List<ServiceCategory>;
+	}
 <div>
 	<h2>@strTitle</h2>
 	<div>
@@ -11,7 +12,7 @@
 		<div class="div-box">
           <a asp-area="" asp-controller="Admin" asp-action="ServiceCategoriesEdit" asp-route-id="">Добавить категории услуг</a> 
 		</div>
-		@if(serviceCategories.Any())
+		@if (serviceCategories != null && serviceCategories.Any())
 		{
 			<div>
 				@foreach(ServiceCategory entity in serviceCategories)
@@ -20,7 +21,7 @@
 						<a asp-area="" asp-controller="Admin" asp-action="ServiceCategoriesEdit" asp-route-id="@entity.Id">редактировать</a>
 						<form style="display: inline-block;" id="form-category-@entity.Id" asp-area="" asp-controller="Admin" asp-action="ServiceCategoriesDelete" method="post">
 							<input type="hidden" name="id" value="@entity.Id"/>
-							<a href="#" onclick="document.getElementById('form-category-@entity.Id').submit();"></a>
+							<a href="#" onclick="document.getElementById('form-category-@entity.Id').submit();">удалить</a>
 
 						</form>
 						<span>
@@ -36,7 +37,7 @@
 		<div class="div-box">
 			<a asp-area="" asp-controller="Admin" asp-action="ServicesEdit" asp-route-id="">Добавить услуги</a>
 		</div>
-		@if (services.Any())
+		@if (services != null && services.Any())
 		{
 			<div>
 				@foreach (Service entity in services)
