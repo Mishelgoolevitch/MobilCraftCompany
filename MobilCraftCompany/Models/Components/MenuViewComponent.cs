@@ -22,7 +22,7 @@ namespace MobilCraftCompany.Models.Components
 
             IEnumerable<ServiceDTO> listDTO=HelperDTO.TransformServices(list);
 
-            return await Task.FromResult((IViewComponentResult) View("Defalt", listDTO));
+            return await Task.FromResult((IViewComponentResult) View("Default", listDTO));
         }
     }
 }
