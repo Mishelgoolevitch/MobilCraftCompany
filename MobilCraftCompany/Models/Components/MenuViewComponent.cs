@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MobilCraftCompany.Domain;
 using MobilCraftCompany.Domain.Entities;
+using MobilCraftCompany.Infrastructure;
 
 namespace MobilCraftCompany.Models.Components
 {
@@ -16,7 +17,12 @@ namespace MobilCraftCompany.Models.Components
         public async Task<IViewComponentResult> InvokeAsync()
         {
             IEnumerable<Service> list=await _dataManager.Services.GetServicesAsync();
-            return await Task.FromResult((IViewComponentResult) View("Defalt", list));
+
+            //Доменную сущность на клиенте использовать не рекомендуется, оборачиваем ее в DTO
+
+            IEnumerable<ServiceDTO> listDTO=HelperDTO.TransformServices(list);
+
+            return await Task.FromResult((IViewComponentResult) View("Defalt", listDTO));
         }
     }
 }
