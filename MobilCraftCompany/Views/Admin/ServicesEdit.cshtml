@@ -3,6 +3,11 @@
 	string strTitle = "Редактировать запись";
 	ViewBag.Title = strTitle;
 }
+<style>
+	button{
+		color:#000 !important;
+	}
+</style>
 <script src="https://cdn.tiny.cloud/1/0fapyl7gymy0wbdznrj5zji77oha1sgnc6v83kdzzqger65a/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
 <div>
@@ -62,5 +67,11 @@
 	  language:'ru',
 	  plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
 	  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+	  automatic_uploads:true,
+	  images_upload_url:'/admin/SaveEditorImg',
+	  images_reuse_filename:true,
+	  image_dimensions:false,
+	  paste_data_images:true,
+	  convert_urls:true
 	});
 </script>
