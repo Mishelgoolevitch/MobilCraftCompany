@@ -4,6 +4,7 @@
 	ViewBag.Title = strTitle;
 }
 @await Html.PartialAsync("_SidebarPartial")
+
 <div class="col-8 col-12-medium imp-medium">
 	<div id="content">
 		@if(Model.Any())
@@ -14,9 +15,9 @@
 				</h2>
 					@foreach(ServiceDTO entity in Model)
 					{
-						<article>
-						<a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id"  class="image-left image-service-list">
-							<img src="~/images/@entity.PhotoFileName" alt="" />
+						<article class="box excerpt">
+						<a asp-area="" asp-controller="Services" asp-action="Show" asp-route-id="@entity.Id"  class="image-left  image-service-list">
+							<im src="~/images/@entity.PhotoFileName" alt="" />
 							</a>
 							<div>
 								<header>
