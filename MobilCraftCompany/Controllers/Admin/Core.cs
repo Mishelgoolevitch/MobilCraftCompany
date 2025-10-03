@@ -10,10 +10,12 @@ namespace MobilCraftCompany.Controllers.Admin
     {
         private readonly DataManager _dataManager;
         private readonly IWebHostEnvironment _hostingEnvironment;
-        public AdminController(DataManager dataManager, IWebHostEnvironment hostingEnvironment)
+        private readonly ILogger<AdminController> _logger;
+        public AdminController(DataManager dataManager, IWebHostEnvironment hostingEnvironment, ILogger<AdminController> logger)
         {
             _dataManager = dataManager;
             _hostingEnvironment = hostingEnvironment;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         { 

@@ -19,7 +19,7 @@ namespace MobilCraftCompany.Controllers.Admin
             if(!ModelState.IsValid) 
             return View(entity);
             await _dataManager.ServiceCategories.SaveServiceCategoryAsync(entity);
-
+            _logger.LogInformation($"Добавлена/обновлена категория услуги с ID:{entity.Id}");
             return RedirectToAction("Index");
         }
 
@@ -27,6 +27,7 @@ namespace MobilCraftCompany.Controllers.Admin
         public async Task<IActionResult> ServiceCategoriesDelete(int id)
         {
             await _dataManager.ServiceCategories.DeleteServiceCategoryAsync(id);
+            _logger.LogInformation($"Удалена категория услуги с ID:{id}");
             return RedirectToAction("Index");
         }
     }

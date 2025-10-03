@@ -29,6 +29,7 @@ namespace MobilCraftCompany.Controllers.Admin
             }
 
             await _dataManager.Services.SaveServiceAsync(entity);
+            _logger.LogInformation($"Добавлена/обновлена услуга с ID:{entity.Id}");
             return RedirectToAction("Index");
         }
 
@@ -36,6 +37,7 @@ namespace MobilCraftCompany.Controllers.Admin
         public async Task<IActionResult> ServicesDelete(int id)
         {
             await _dataManager.Services.DeleteServiceAsync(id);
+            _logger.LogInformation($"Удалена услуга с ID:{id}");
             return RedirectToAction("Index");
         }
     }

@@ -60,6 +60,13 @@ namespace MobilCraftCompany
             //Собираем конфигурацию
             WebApplication app = builder.Build();
 
+            //Используем логирование
+            app.UseSerilogRequestLogging();
+
+            //Подключаем обработку исключений
+            if (app.Environment.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+
             //Подключаем использование статичных файлов (js, css)
             app.UseStaticFiles();
 
