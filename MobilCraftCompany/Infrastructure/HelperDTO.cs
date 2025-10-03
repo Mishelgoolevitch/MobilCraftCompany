@@ -25,5 +25,10 @@ namespace MobilCraftCompany.Infrastructure
             entitiesDTO.Add(TransformService(entity));
             return entitiesDTO;
         }
+        //Добавил явное приведение 
+        //internal static Service TransformServices(Service entity)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

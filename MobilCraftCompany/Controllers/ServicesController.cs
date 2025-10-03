@@ -36,9 +36,11 @@ namespace MobilCraftCompany.Controllers
 
             //Доменную сущность на клиенте использовать не рекомендуется, оборачиваем ее в DTO
 
-            Service entityDTO = HelperDTO.TransformServices(entity);
+            ServiceDTO entityDTO = HelperDTO.TransformService(entity);
 
             return View(entityDTO);
+          
+
         }
     }
 }
