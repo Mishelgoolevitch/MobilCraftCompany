@@ -5,6 +5,7 @@ using MobilCraftCompany.Domain;
 using MobilCraftCompany.Domain.Repositories.Abstract;
 using MobilCraftCompany.Domain.Repositories.EntityFramework;
 using MobilCraftCompany.Infrastructure;
+using Serilog;
 namespace MobilCraftCompany
 {
     public class Program
@@ -31,9 +32,6 @@ namespace MobilCraftCompany
             builder.Services.AddTransient<IServicesRepository, EFServicesRepository>();
             builder.Services.AddTransient<DataManager>();
 
-            //Подключаем функционал контролеров
-            builder.Services.AddControllersWithViews();
-
             //Настраиваем Identity систему
             builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => { options.User.RequireUniqueEmail = true;
                 options.Password.RequiredLength = 6;
@@ -53,6 +51,11 @@ namespace MobilCraftCompany
                 options.AccessDeniedPath= "/admin/accessdenied";
                 options.SlidingExpiration = true;
             });
+
+            //Подключаем функционал контролеров
+            builder.Services.AddControllersWithViews();
+
+            builder.Host.UseSerilog((context, configuration)=>configuration.ReadFrom.Configuration(context.Configuration));
 
             //Собираем конфигурацию
             WebApplication app = builder.Build();
